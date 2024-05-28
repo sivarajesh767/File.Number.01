@@ -28,13 +28,13 @@ initlizeDbAndReverse()
 
 const convertDbObjectToPlayerDetailsObject = dbObject => {
   return {
-    player_id: dbObject.playerId,
-    player_name: dbObject.playerName,
+    playerId: dbObject.player_id,
+    playerName: dbObject.player_name,
   }
 }
 const convertDbObjectToMatchDetailsObject = dbObject => {
   return {
-    match_id: dbObject.matchId,
+    matchId: dbObject.match_id,
     match: dbObject.match,
     year: dbObject.year,
   }
@@ -66,7 +66,7 @@ app.get('/players/:playerId/', async (request, response) => {
   player_id = '${playerId}';`
 
   const getArray = await database.get(getPlayersQuery)
-  response.send(convertDbObjectToPlayerDetailsObject(getArray))
+  response.send('Player Details Updated)
 })
 
 app.put('/players/:playerId/', async (request, response) => {
@@ -134,11 +134,11 @@ app.get('/players/:playerId/playerScores', async (request, response) => {
   const {playerId} = request.params
   const getPlayerQuerry = `
   SELECT
-  player_id as '${playerId}',
-  player_name as '${playerName}',
-  SUM(scores) as '${totalScores}',
-  SUM(fours) as '${totalFours}',
-  SUM(sixes) as '${totalSixes}'
+  player_id AS '${playerId}',
+  player_name AS '${playerName}',
+  SUM(scores) AS '${totalScores}',
+  SUM(fours) AS '${totalFours}',
+  SUM(sixes) AS '${totalSixes}'
   
   FROM
    player_match_score NATURAL JOIN player_details
